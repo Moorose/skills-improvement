@@ -14,7 +14,7 @@ public class Service {
     }
 
 
-    public String getSubstringPalindrome(String str) {
+    public String getPalindrome(String str) {
         str = clearString(str);
         String palindrome;
 
@@ -38,7 +38,7 @@ public class Service {
                 index = i;
             }
         }
-        return palindromeList.get(index);
+        return palindromeList.size()!=0 ? palindromeList.get(index) : "We can't find a palindrome here";
     }
 
     private boolean isPalindrome(String palindrome) {
