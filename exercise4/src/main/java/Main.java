@@ -1,6 +1,12 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Main {
     /**
-     *
      * Реализовать структуру данных - однонаправленный список.
      * Методы списка:
      * - Сравнение значений списка
@@ -12,9 +18,12 @@ public class Main {
      * Результат:
      * 1. Реализованная структура данных и алгоритм решения задачи
      * 2. Провести асимптотический анализ реализованного алгоритма
-     *
-     * **/
-    public static void main(String[] args) {
+     **/
+    public static void main(String[] args) throws IOException {
+        File filePath = new File("./exercise4/res/testdata.json");
+
+        DataParser dataParser = new DataParser();
+        dataParser.getData(filePath);
 
     }
 
