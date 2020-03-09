@@ -1,39 +1,35 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
-public class DataParser {
+public class DataParser<T> {
 
-    void setData(File filePath, ) throws IOException {}
-
-    void getData(File filePath) throws IOException {
-        String response = readData(filePath);
-
-        if (response.isEmpty()) throw new IOException("We can`t find any data on this way: " + filePath.toString());
+    void writeData(File filePath, T object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-//        JsonNode rootNode = mapper.readValue("{\"message\":\"Hi\",\"place\":{\"name\":\"World!\"}}", JsonNode.class); // парсинг текста
-//        String message = rootNode.get("message").asText(); // получение строки из поля "message"
-//        JsonNode childNode = rootNode.get("place"); // получаем объект Place
-//        String place = childNode.get("name").asText(); // получаем строку из поля "name"
-//        System.out.println(message + " " + place); // напечатает "Hi World!"
+
+        mapper.writeValue(filePath, object);
+
+        String jsonString = mapper.writeValueAsString(object);
+        System.out.println(jsonString);
+
+        String jsonInString2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+        System.out.println(jsonInString2);
+
     }
 
-    private String readData(File filePath) {
-        StringBuffer str = new StringBuffer();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                str.append(s);
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+    T getData(File filePath) {
+        T object = null;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            object = mapper.readValue(filePath, T.class);
+
+            System.out.println(object);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return str.toString();
+        return object;
     }
 
 }

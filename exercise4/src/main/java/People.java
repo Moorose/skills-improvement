@@ -2,6 +2,14 @@ import java.util.Objects;
 
 public class People {
     private String firstName;
+
+    public People(String firstName, String lastName, String patronymic, Profession profession) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.profession = profession;
+    }
+
     private String lastName;
     private String patronymic;
     private Profession profession;
