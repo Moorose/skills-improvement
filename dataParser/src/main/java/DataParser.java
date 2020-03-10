@@ -9,23 +9,18 @@ public class DataParser<T> {
         ObjectMapper mapper = new ObjectMapper();
 
         mapper.writeValue(filePath, object);
-
-        String jsonString = mapper.writeValueAsString(object);
-        System.out.println(jsonString);
-
-        String jsonInString2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
-        System.out.println(jsonInString2);
+//
+//        String jsonInString2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+//        System.out.println(jsonInString2);
 
     }
 
-    T getData(File filePath) {
+    <T> T readData(File filePath, Class<T> valueType) {
         T object = null;
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            object = mapper.readValue(filePath, T.class);
-
-            System.out.println(object);
+            object = mapper.readValue(filePath, valueType);
         } catch (IOException e) {
             e.printStackTrace();
         }

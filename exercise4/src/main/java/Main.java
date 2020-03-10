@@ -1,5 +1,3 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -22,8 +20,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         File filePath = new File("./exercise4/res/testdata.json");
 
-        DataParser dataParser = new DataParser();
-        dataParser.getData(filePath);
+        TestData testData = new TestData("Alexey", "Blagoy");
+
+        DataParser<TestData> dataParser = new DataParser();
+        dataParser.writeData(filePath, testData);
+        TestData response = dataParser.readData(filePath, TestData.class);
+        System.out.println(response);
 
     }
 
