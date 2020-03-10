@@ -13,12 +13,13 @@ public class Service {
     String getSubString(String str) {
         if (str.isEmpty()) throw new NullPointerException();
 
+        int length = str.length();
         String buf = "";
 
-        for (int i = 0; i < str.length(); i++) {
-            for (int j = i + 1; j < str.length(); j++) {
+        for (int i = 0; i < length; i++) {
+            for (int j = i + 1; j < length; j++) {
 
-                if (str.charAt(i) >= str.charAt(j)) {
+                if (str.charAt(j-1) > str.charAt(j) || j == length-1) {
                     logger(i, j, str);
                     if (buf.length() < j - i) {
                         buf = str.substring(i, j);
@@ -30,7 +31,7 @@ public class Service {
             }
         }
 
-        return buf;
+        return buf.trim();
     }
 
     private void logger(int i, int j, String str) {
