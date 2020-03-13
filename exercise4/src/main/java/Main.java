@@ -1,7 +1,8 @@
-import java.io.BufferedReader;
+import directionallist.OneWayList;
+
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
     /**
@@ -18,14 +19,14 @@ public class Main {
      * 2. Провести асимптотический анализ реализованного алгоритма
      **/
     public static void main(String[] args) throws IOException {
-        File filePath = new File("./exercise4/res/testdata.json");
+//        AddService.writeData();
 
-        TestData testData = new TestData("Alexey", "Blagoy");
+        MockController controller = new MockController();
+        OneWayList<People> people = controller.getPeople();
+        OneWayList<String> professions = controller.getProfessions();
 
-        DataParser<TestData> dataParser = new DataParser();
-        dataParser.writeData(filePath, testData);
-        TestData response = dataParser.readData(filePath, TestData.class);
-        System.out.println(response);
+        System.out.println(people.toString());
+        System.out.println(professions.toString());
 
     }
 
