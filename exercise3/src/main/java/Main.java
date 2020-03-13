@@ -14,6 +14,8 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        // Сложность данного алгоритма O(N^3)
+
         Service serviceWithTrim = new Service(true);
         Service serviceWithoutTrim = new Service(false);
         List<String> data1 = new ArrayList();
@@ -24,10 +26,11 @@ public class Main {
         data2.add("");
         data2.add("(***-%--+&+&+--%-***)");
         data2.add("продуктмедякакядемпчелиныймёд");
-        data2.add("абвба");
-        data2.add("абввба");
-        data2.add("123321");
-        data2.add("12321");
+        data2.add("/*/*/ абвба ***///");
+        data2.add("||||абввба ***");
+        data2.add("-=-=-123321()");
+        data2.add(",,, 12321 aaa");
+        data2.add("9|-_-|9 12321 aaa");
 
         System.out.println("serviceWithTrim");
         data1.stream().map(serviceWithTrim::getPalindrome).forEach(System.out::println);

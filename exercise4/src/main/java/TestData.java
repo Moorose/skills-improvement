@@ -1,39 +1,42 @@
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.util.ArrayList;
+
+@JsonSerialize
 public class TestData {
 
-    String firstName;
-    String lastName;
-
-
-    public TestData(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    People[] people;
+    String[] professions;
 
     public TestData() {
-        this("","");
     }
 
-    public String getFirstName() {
-        return firstName;
+    public TestData(People[] people, String[] professions) {
+        this.people = people;
+        this.professions = professions;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public People[] getPeople() {
+        return people;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setPeople(People[] people) {
+        this.people = people;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String[] getProfessions() {
+        return professions;
+    }
+
+    public void setProfessions(String[] professions) {
+        this.professions = professions;
     }
 
     @Override
     public String toString() {
-        return "TestData{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+        return "TestData{\n" +
+                "people=" + people +
+                ",\n professions=" + professions +
                 '}';
     }
 }

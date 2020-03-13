@@ -1,18 +1,23 @@
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.Objects;
 
+@JsonSerialize
 public class People {
     private String firstName;
+    private String lastName;
+    private String patronymic;
+    private String profession;
 
-    public People(String firstName, String lastName, String patronymic, Profession profession) {
+    public People() {
+    }
+
+    public People(String firstName, String lastName, String patronymic, String profession) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
         this.profession = profession;
     }
-
-    private String lastName;
-    private String patronymic;
-    private Profession profession;
 
     public String getFirstName() {
         return firstName;
@@ -38,11 +43,11 @@ public class People {
         this.patronymic = patronymic;
     }
 
-    public Profession getProfession() {
+    public String getProfession() {
         return profession;
     }
 
-    public void setProfession(Profession profession) {
+    public void setProfession(String profession) {
         this.profession = profession;
     }
 
@@ -51,14 +56,19 @@ public class People {
         if (this == o) return true;
         if (!(o instanceof People)) return false;
         People people = (People) o;
-        return Objects.equals(firstName, people.firstName) &&
-                Objects.equals(lastName, people.lastName) &&
-                Objects.equals(patronymic, people.patronymic) &&
-                Objects.equals(profession, people.profession);
+        return firstName.equals(people.firstName) &&
+                lastName.equals(people.lastName) &&
+                patronymic.equals(people.patronymic) &&
+                profession.equals(people.profession);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, patronymic, profession);
+    public String toString() {
+        return "People{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", profession='" + profession + '\'' +
+                '}';
     }
 }
