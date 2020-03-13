@@ -18,23 +18,30 @@ public class Service {
         PATTERN = Pattern.compile("[аеёиоуыэюя]");
     }
 
-    List<String> getWords(String str) {
+    List<String> getWords(String str) {  // O(LN + N + KN^2)= O(N(L+1+KN))=O(N(L+KN))
+        if (str.isEmpty()) {
+            return new ArrayList<>(); // null -> NPE
+        }
+
         List<String> wordList = splitString(str);
-        wordList = getCorrectWords(wordList);
-        wordList = notTooFastComparator(wordList);
+        wordList = getCorrectWords(wordList);   // O(LN + N)
+        wordList = notTooFastComparator(wordList);  // O(KN^2)
 
         return wordList;
     }
 
-    private List<String> getCorrectWords(List<String> wordList) {
+    private List<String> getCorrectWords(List<String> wordList) {   // O(LN + N)
         int length = wordList.size();
-        int wordLength[] = new int[length];
+        int[] wordLength = new int[length];
         int max = 0;
-        List<String> matchWord = new ArrayList<>();
+
         for (int i = 0; i < length; i++) {
             wordLength[i] = matchVowel(wordList.get(i));
-            max = max < wordLength[i] ? wordLength[i] : max;
+            max = Math.max(max, wordLength[i]);
         }
+
+        List<String> matchWord = new ArrayList<>();
+
         for (int i = 0; i < length; i++) {
             if (wordLength[i] == max) matchWord.add(wordList.get(i));
         }
@@ -43,7 +50,7 @@ public class Service {
         return matchWord;
     }
 
-    private int matchVowel(String input) {
+    private int matchVowel(String input) {     // O(L) L- длинна строки
         Matcher matcher = PATTERN.matcher(input);
         int countMatches = 0;
         while (matcher.find())
@@ -57,7 +64,8 @@ public class Service {
         return new ArrayList<>(Arrays.asList(wordMas));
     }
 
-    private List<String> notTooFastComparator(List<String> wordList) {
+    private List<String> notTooFastComparator(List<String> source) {    // O(KN^2)
+        List<String> wordList = new ArrayList<>(source);
         if (wordList.size() == 1) return wordList;
         int count = 0;
 
@@ -75,18 +83,11 @@ public class Service {
         return wordList;
     }
 
-    private boolean compareWord(String word1, String word2) {
-        int length = word1.length() < word2.length() ? word1.length() : word2.length();
-        boolean equalParts = false;
+    private boolean compareWord(String word1, String word2) { // O(K) K - длинна меньшей строки
+        int length = Math.min(word1.length(), word2.length());
 
         for (int i = 0; i < length; i++) {
-            if (word1.charAt(i) == word2.charAt(i)) {
-                equalParts = true;
-            } else if (word1.charAt(i) > word2.charAt(i) & (equalParts || i == 0)) {
-                return true;
-            } else {
-                return false;
-            }
+            return word2.charAt(i) <= word1.charAt(i);
         }
         return false;
     }

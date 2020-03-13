@@ -4,18 +4,23 @@ import java.util.List;
 public class Service {
 
     boolean LOG;
+    boolean TRIM;
 
     Service() {
-        this(false);
+        this(false, false);
     }
 
-    Service(boolean log) {
+    Service(boolean trim) {
+        this(trim, false);
+    }
+    Service(boolean trim, boolean log) {
         LOG = log;
+        TRIM = trim;
     }
 
 
     public String getPalindrome(String str) {
-        str = clearString(str);
+        if (TRIM) str = clearString(str);
         String palindrome;
 
         List<String> palindromeList = new ArrayList<>();
@@ -38,7 +43,7 @@ public class Service {
                 index = i;
             }
         }
-        return palindromeList.size()!=0 ? palindromeList.get(index) : "We can't find a palindrome here";
+        return palindromeList.size()!=0 ? palindromeList.get(index) : "";
     }
 
     private boolean isPalindrome(String palindrome) {
