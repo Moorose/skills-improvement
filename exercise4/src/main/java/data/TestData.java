@@ -1,6 +1,7 @@
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+package data;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import service.People;
 
 @JsonSerialize
 public class TestData {
@@ -34,7 +35,7 @@ public class TestData {
 
     @Override
     public String toString() {
-        return "TestData{\n" +
+        return "data.TestData{\n" +
                 "people=" + people +
                 ",\n professions=" + professions +
                 '}';

@@ -1,6 +1,6 @@
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+package service;
 
-import java.util.Objects;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
 public class People {

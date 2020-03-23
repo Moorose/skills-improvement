@@ -1,9 +1,11 @@
+package data;
+
+import dataparser.DataParser;
+import service.People;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 public class AddService {
 

@@ -30,6 +30,11 @@ public class Item<T> {
         this.nextItem = nextItem;
     }
 
+    public boolean equals(Item item) {
+        return data.equals(item.data);
+    }
+
+
     @Override
     public String toString() {
         return data.toString();

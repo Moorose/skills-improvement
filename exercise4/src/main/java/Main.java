@@ -1,8 +1,11 @@
+import data.MockController;
+import data.TestData;
+import dataparser.DataParser;
 import directionallist.OneWayList;
+import service.People;
+import service.Service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
     /**
@@ -19,15 +22,17 @@ public class Main {
      * 2. Провести асимптотический анализ реализованного алгоритма
      **/
     public static void main(String[] args) throws IOException {
-//        AddService.writeData();
+//        data.AddService.writeData();
 
         MockController controller = new MockController();
         OneWayList<People> people = controller.getPeople();
         OneWayList<String> professions = controller.getProfessions();
 
-        System.out.println(people.toString());
-        System.out.println(professions.toString());
 
+        Service service = new Service();
+
+        OneWayList<People> peopleOneWayList = service.clearListByProf(people, professions);
+        System.out.println(peopleOneWayList.toString());
     }
 
 }

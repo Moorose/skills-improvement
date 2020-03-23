@@ -1,3 +1,5 @@
+package dataparser;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -5,7 +7,7 @@ import java.io.IOException;
 
 public class DataParser<T> {
 
-    void writeData(File filePath, T object) throws IOException {
+    public void writeData(File filePath, T object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
         mapper.writeValue(filePath, object);
@@ -15,7 +17,7 @@ public class DataParser<T> {
 
     }
 
-    <T> T readData(File filePath, Class<T> valueType) {
+    public <T> T readData(File filePath, Class<T> valueType) {
         T object = null;
         ObjectMapper mapper = new ObjectMapper();
 
