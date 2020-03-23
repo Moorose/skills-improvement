@@ -2,7 +2,7 @@ package directionallist;
 
 public class OneWayList<T> {
 
-    private Item firstItem;
+    private Item<T> firstItem;
 
     public OneWayList() {
     }
@@ -19,12 +19,12 @@ public class OneWayList<T> {
 
     public T getNextItem(T data) { //  O(n^2)
         isNull(data);
-        Item item = findItem(data);
+        Item<T> item = findItem(data);
 
         if (item == null || item.getNextItem() == null) {
             return null;
         }
-        return (T) item.getNextItem().getData();
+        return item.getNextItem().getData();
     }
 
     private Item findItem(T data) {     //  O(n)

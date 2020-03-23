@@ -1,9 +1,9 @@
-package directionallist;
+package queue;
 
 public class Item<T> {
 
     private T data;
-    private Item<T> nextItem;
+    private Item nextItem;
 
     public Item(T data) {
         this(data, null);
@@ -22,17 +22,18 @@ public class Item<T> {
         this.data = data;
     }
 
-    public Item<T> getNextItem() {
+    public Item getNextItem() {
         return nextItem;
     }
 
-    public void setNextItem(Item<T> nextItem) {
+    public void setNextItem(Item nextItem) {
         this.nextItem = nextItem;
     }
 
-    public boolean equals(Item<T> item) {
+    public boolean equals(Item item) {
         return data.equals(item.data);
     }
+
 
     @Override
     public String toString() {

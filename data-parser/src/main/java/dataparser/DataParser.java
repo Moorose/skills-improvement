@@ -2,7 +2,9 @@ package dataparser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class DataParser<T> {
@@ -11,10 +13,9 @@ public class DataParser<T> {
         ObjectMapper mapper = new ObjectMapper();
 
         mapper.writeValue(filePath, object);
-//
+
 //        String jsonInString2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 //        System.out.println(jsonInString2);
-
     }
 
     public <T> T readData(File filePath, Class<T> valueType) {
@@ -29,4 +30,17 @@ public class DataParser<T> {
         return object;
     }
 
+
+    public static String readString(File filePath) {
+        StringBuffer str = new StringBuffer();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String s;
+            while ((s = br.readLine()) != null) {
+                str.append(s);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return str.toString();
+    }
 }

@@ -28,7 +28,6 @@ public class Main {
         OneWayList<People> people = controller.getPeople();
         OneWayList<String> professions = controller.getProfessions();
 
-
         Service service = new Service();
 
         OneWayList<People> peopleOneWayList = service.clearListByProf(people, professions);
