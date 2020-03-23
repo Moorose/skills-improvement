@@ -3,8 +3,7 @@
  *.ipr
 out/
 .idea_modules/
-target/
-**/target/
+*/target/*
 log/
 pom.xml.tag
 pom.xml.releaseBackup
