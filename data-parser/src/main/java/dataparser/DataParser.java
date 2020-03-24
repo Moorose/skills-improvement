@@ -37,6 +37,7 @@ public class DataParser<T> {
             String s;
             while ((s = br.readLine()) != null) {
                 str.append(s);
+                str.append('\n');
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

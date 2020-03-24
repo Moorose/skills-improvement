@@ -1,6 +1,7 @@
 import data.DataReader;
 import dataparser.DataParser;
 import queue.HandmadeQueue;
+import service.Service;
 
 import java.io.File;
 import java.util.List;
@@ -20,11 +21,22 @@ public class Main {
      * 1. Реализованная структура данных и алгоритм решения задачи
      * 2. Провести асимптотический анализ реализованного алгоритма
      **/
+
+    static final int N = 10;
+
     public static void main(String[] args) {
         DataReader dataReader = new DataReader();
-        HandmadeQueue<Integer> data = dataReader.getData();
-        System.out.println(data);
-        
+        List<HandmadeQueue<Integer>> data = dataReader.getData();
+
+        Service service = new Service();
+
+        data.forEach(d -> {
+            System.out.println(d);
+            String output = service.getOutputData(d, N);
+            System.out.println(output);
+            System.out.println();
+        });
+
     }
 
 }

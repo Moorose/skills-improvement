@@ -29,13 +29,21 @@ public class HandmadeQueue<T> {
 
     public T pop() {
         if (firstItem == tail) {
-            return tail == null ? null : tail.getData();
+            if (tail != null) {
+                firstItem = null;
+                T data = tail.getData();
+                tail = null;
+                return data;
+            } else {
+                return null;
+            }
         }
         Item<T> item = firstItem;
         Item<T> oldTail = tail;
         while (true) {
             if (item.getNextItem().equals(tail)) {
                 tail = item;
+                tail.setNextItem(null);
                 return oldTail.getData();
             } else {
                 item = item.getNextItem();
@@ -45,7 +53,7 @@ public class HandmadeQueue<T> {
 
     public List<T> searchByCriteria(Predicate<T> criterion) {
         List<T> suitableItem = new ArrayList<>();
-        if (firstItem == null){
+        if (firstItem == null) {
             return suitableItem;
         }
         Item<T> item = firstItem;
@@ -60,6 +68,42 @@ public class HandmadeQueue<T> {
         return suitableItem;
     }
 
+    public T getByCriteria(Predicate<T> criterion) {
+        if (firstItem == null) {
+            return null;
+        }
+        Item<T> item = firstItem;
+        Item<T> beforeItem = null;
+
+        while (item != null) {
+            if (criterion.test(item.getData())) {
+                if (item == firstItem) {
+                    if (firstItem.getNextItem() == null) {
+                        firstItem = null;
+                        tail = null;
+                    } else {
+                        firstItem = firstItem.getNextItem();
+                    }
+                } else if (item == tail) {
+                    tail = beforeItem;
+                    if (tail != null) {
+                        tail.setNextItem(null);
+                    }
+                } else {
+                    if (beforeItem != null) {
+                        beforeItem.setNextItem(item.getNextItem());
+                    }
+                }
+                return item.getData();
+            }
+            beforeItem = item;
+            item = item.getNextItem();
+        }
+        ;
+
+        return null;
+    }
+
     private void isNull(T data) {
         if (data == null) {
             throw new NullPointerException("Element cannot be null!");
@@ -69,12 +113,12 @@ public class HandmadeQueue<T> {
     @Override
     public String toString() {
 
-        return "HandmadeQueue{\n" + toString(firstItem) + "}";
+        return "HandmadeQueue{ " + toString(firstItem) + " }";
     }
 
     private String toString(Item item) {
         if (item.getNextItem() != null) {
-            return item.toString() + '\n' + toString(item.getNextItem());
+            return item.toString() + ' ' + toString(item.getNextItem());
         }
         return item.toString();
     }
