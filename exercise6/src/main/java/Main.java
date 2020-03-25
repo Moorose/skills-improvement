@@ -1,3 +1,6 @@
+import setofstacks.SetOfStacks;
+import setofstacks.Stack;
+
 public class Main {
     /**
      * Реализовать структуру данных SetOfStacks.
@@ -12,8 +15,20 @@ public class Main {
      * Результат:
      * 1. Реализованная структура данных и алгоритм решения задачи
      * 2. Провести асимптотический анализ реализованного алгоритма
-     * **/
+     **/
     public static void main(String[] args) {
+        SetOfStacks<Integer> setOfStacks = new SetOfStacks<>(5, 5);
+        for (int i = 0; i < 25; i++) {
+            setOfStacks.push(i);
+            System.out.println(setOfStacks);
+        }
+
+        for (int i = 0; i < 26; i++) {
+            setOfStacks.popAt(4);
+            System.out.println(setOfStacks);
+        }
+
+
 
     }
 

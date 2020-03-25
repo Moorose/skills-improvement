@@ -13,7 +13,7 @@ public class HandmadeQueue<T> {
         return firstItem == tail;
     }
 
-    public void push(T data) {
+    public void push(T data) {  //  O(1)
         isNull(data);
 
         Item<T> item = new Item<T>(data);
@@ -27,7 +27,7 @@ public class HandmadeQueue<T> {
         }
     }
 
-    public T pop() {
+    public T pop() {        // O(n)
         if (firstItem == tail) {
             if (tail != null) {
                 firstItem = null;
@@ -51,24 +51,24 @@ public class HandmadeQueue<T> {
         }
     }
 
-    public List<T> searchByCriteria(Predicate<T> criterion) {
-        List<T> suitableItem = new ArrayList<>();
-        if (firstItem == null) {
-            return suitableItem;
-        }
-        Item<T> item = firstItem;
+//    public List<T> searchByCriteria(Predicate<T> criterion) {
+//        List<T> suitableItem = new ArrayList<>();
+//        if (firstItem == null) {
+//            return suitableItem;
+//        }
+//        Item<T> item = firstItem;
+//
+//        while (item != tail) {
+//            if (criterion.test(item.getData())) {
+//                suitableItem.add(item.getData());
+//            }
+//            item = item.getNextItem();
+//        }
+//
+//        return suitableItem;
+//    }
 
-        while (item != tail) {
-            if (criterion.test(item.getData())) {
-                suitableItem.add(item.getData());
-            }
-            item = item.getNextItem();
-        }
-
-        return suitableItem;
-    }
-
-    public T getByCriteria(Predicate<T> criterion) {
+    public T getByCriteria(Predicate<T> criterion) {        // O(n)
         if (firstItem == null) {
             return null;
         }
