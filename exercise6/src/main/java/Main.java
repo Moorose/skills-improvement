@@ -1,5 +1,10 @@
+import dataparser.DataParser;
 import setofstacks.SetOfStacks;
 import setofstacks.Stack;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     /**
@@ -17,19 +22,26 @@ public class Main {
      * 2. Провести асимптотический анализ реализованного алгоритма
      **/
     public static void main(String[] args) {
-        SetOfStacks<Integer> setOfStacks = new SetOfStacks<>(5, 5);
-        for (int i = 0; i < 25; i++) {
-            setOfStacks.push(i);
-            System.out.println(setOfStacks);
+        int stackSize = 10, setSize = 100;
+        File filePath = new File("./exercise6/res/numbers.txt");
+        String readString = DataParser.readString(filePath);
+        String[] string = readString.replace("\n", "").split(" ");
+
+        SetOfStacks<Integer> setOfStacks = new SetOfStacks<>(stackSize, setSize);
+
+        Arrays.stream(string)
+                .map(Integer::parseInt)
+                .forEach(setOfStacks::push);
+
+        ArrayList<Integer> popAtNumber = new ArrayList<>();
+        ArrayList<Integer> popNumber= new ArrayList<>();
+
+        for (int i = 0; i < 500; i++) {
+            popNumber.add(setOfStacks.pop());
+            popAtNumber.add(setOfStacks.popAt(0));
         }
-
-        for (int i = 0; i < 26; i++) {
-            setOfStacks.popAt(4);
-            System.out.println(setOfStacks);
-        }
-
-
-
+        System.out.println(popNumber);
+        System.out.println(popAtNumber);
     }
 
 }

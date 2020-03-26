@@ -12,26 +12,32 @@ public class Stack<T> {
         stackSize = size;
     }
 
-    public void push(T data) {
-        if (stack.size() < stackSize) {
-            stack.add(0, data);
+    public void push(T data) {      //   O (n)
+        if (stack.size() < stackSize) {     //  O (1)
+            stack.add(0, data);       // O (n)
             return;
         }
         throw new ArrayStoreException("Stack is full");
     }
 
 
-    public T pop() {
-        T element = stack.get(0);
-        stack.remove(element);
+    public T pop() {        //   O (n)
+        T element = stack.get(0);   //  O (1)
+        stack.remove(element);      //   O (n)
         return element;
     }
 
-    public boolean isEmpty() {
+    public T removeBottom() {    //  O (n)
+        T element = stack.get(stack.size()-1);   //  O (1)
+        stack.remove(element);                   //  O (n)
+        return element;
+    }
+
+    public boolean isEmpty() {    //    O (1)
         return stack.isEmpty();
     }
 
-    public boolean isFull() {
+    public boolean isFull() {    //    O (1)
         return stack.size() == stackSize;
     }
 
@@ -47,37 +53,21 @@ public class Stack<T> {
             this.mas = new ArrayList<>(stackSize);
         }
 
-        private void checkIndex(int index) {
+        private void checkIndex(int index) {    //    O (1)
             if (index > stackSize) {
                 throw new IndexOutOfBoundsException();
             }
         }
 
-        public int size() {
+        public int size() { //    O (1)
             return mas.size();
         }
 
-        public boolean isEmpty() {
+        public boolean isEmpty() {  //    O (1)
             return mas.isEmpty();
         }
 
-        public boolean contains(Object o) {
-            return mas.contains(o);
-        }
-
-        public boolean add(T t) {
-            if (size() < stackSize) {
-                mas.add(t);
-                return true;
-            }
-            return false;
-        }
-
-        public void clear() {
-            mas = new ArrayList<T>(stackSize);
-        }
-
-        public T get(int index) {
+        public T get(int index) {   //  O (1)
             checkIndex(index);
             if (mas.size() <= index) {
                 return null;
@@ -85,31 +75,15 @@ public class Stack<T> {
             return mas.get(index);
         }
 
-        public T set(int index, T element) {
-            checkIndex(index);
-            return null;
-        }
 
-        public void add(int index, T element) {
+
+        public void add(int index, T element) { // O (n)
             checkIndex(index);
             mas.add(index, element);
         }
 
-        public boolean remove(Object o) {
+        public boolean remove(Object o) {   //   O (n)
             return mas.remove(o);
-        }
-
-        public T remove(int index) {
-            checkIndex(index);
-            return mas.remove(index);
-        }
-
-        public int indexOf(Object o) {
-            return mas.indexOf(o);
-        }
-
-        public int lastIndexOf(Object o) {
-            return mas.lastIndexOf(o);
         }
     }
 
@@ -117,8 +91,8 @@ public class Stack<T> {
     public String toString() {
         return "\nStack{" +
                 "stack=" + stack +
-                 ", stack`s size=" + stack.size()+
-                ", stackSize=" + stackSize +
+                 ", stack fullness=" + stack.size()+
+                ", stack capacity=" + stackSize +
                 '}';
     }
 }

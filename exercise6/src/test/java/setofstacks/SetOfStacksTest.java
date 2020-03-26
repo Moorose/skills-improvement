@@ -34,26 +34,33 @@ class SetOfStacksTest {
 
     @Test
     void pushAndPop() {
-        int data = 10;
-        setOfStacks.push(data);
-        assertEquals(data, setOfStacks.pop());
+        for (int i = 0; i < setSize * stackSize; i++) {
+            setOfStacks.push(i);
+        }
+        for (int i = 0; i < setSize * stackSize; i++) {
+            assertNotEquals(null, setOfStacks.pop());
+        }
     }
 
     @Test
-    void overPop() {
+    void popEmptySet() {
         assertEquals(null, setOfStacks.pop());
     }
 
     @Test
     void popAt() {
-//        setOfStacks.popAt(3);
+        for (int i = 0; i < setSize * stackSize; i++) {
+            setOfStacks.push(i);
+        }
+        assertEquals(stackSize * (setSize - 3) - 1, setOfStacks.popAt(setSize - 4));
+        assertEquals(stackSize * (setSize - 3), setOfStacks.popAt(setSize - 4));
     }
 
     @Test
-    void overPopAt() {
-        assertEquals(null, setOfStacks.popAt(stackSize-1));
-        assertEquals(null, setOfStacks.popAt(stackSize-2));
-        assertEquals(null, setOfStacks.popAt(stackSize-3));
+    void popAtEmptySet() {
+        assertEquals(null, setOfStacks.popAt(stackSize - 1));
+        assertEquals(null, setOfStacks.popAt(stackSize - 2));
+        assertEquals(null, setOfStacks.popAt(stackSize - 3));
     }
 
     @Test
